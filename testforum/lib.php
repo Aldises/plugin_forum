@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/** ff
+/** fff
  * Library of interface functions and constants for module testforum
  *
  * All the core Moodle functions, neeeded to allow the module to work
