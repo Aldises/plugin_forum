@@ -209,9 +209,9 @@
 		$period=(int)(qa_opt('db_time')/3600);
 		
 		if (isset($userid))
-			qa_db_limits_user_add($userid, $action, $period, 1);
+			qa_db_limits_user_add($userid, $action, $period, 0); // enlève la limite des posts
 		
-		qa_db_limits_ip_add(qa_remote_ip_address(), $action, $period, 1);
+		qa_db_limits_ip_add(qa_remote_ip_address(), $action, $period, 0); // enlève la limite des posts
 	}
 
 
