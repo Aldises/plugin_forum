@@ -124,7 +124,7 @@
 	{
 		$publicusername=$logged_in_user['publicusername'];
 		
-		return '<a href="'.qa_path_html('user/'.$publicusername).'" class="qa-user-link">'.htmlspecialchars($publicusername).'</a>';
+		return '<span class="qa-user-link">'.$publicusername.'</span>'; // Supression du lien pour renvoyer aux utilisateurs
 	}
 
 
