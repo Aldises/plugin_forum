@@ -94,7 +94,7 @@ $result=mysql_fetch_assoc(
 );
 $userid_moodle = $result['userid'];
 
-echo " <iframe src='../testforum/q2a/index.php?k_1=$cat[tags]&qa=questions&qa_1=$cat[tags]' width='1200' height='2000' frameborder='0'></iframe> ";
+echo " <iframe src='../testforum/q2a/index.php?k_1=$cat[tags]&qa=questions&qa_1=$cat[tags]' width='1200' height='1000' frameborder='0'></iframe> ";
 
 echo "</html>";
 
