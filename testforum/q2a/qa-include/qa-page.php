@@ -676,12 +676,12 @@
 				? qa_get_logged_in_user_html(qa_get_logged_in_user_cache(), qa_path_to_root(), false)
 				: qa_get_one_user_html(qa_get_logged_in_handle(), false)
 			);
-			
-			$qa_content['navigation']['user']['updates']=array(
+			/*
+			$qa_content['navigation']['user']['updates']=array( // On supprime le lien Myupdate qui renvoit à des éléments de l'ensemble du forum et pas du cours
 				'url' => qa_path_html('updates'),
 				'label' => qa_lang_html('main/nav_updates'),
-			);
-				
+			);*/
+
 			if (!empty($userlinks['logout']))
 				$qa_content['navigation']['user']['logout']=array(
 					'url' => qa_html(@$userlinks['logout']),

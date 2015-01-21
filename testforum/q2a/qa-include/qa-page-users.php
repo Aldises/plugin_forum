@@ -34,6 +34,7 @@
 	require_once QA_INCLUDE_DIR.'qa-app-format.php';
 
 
+
 //	Get list of all users
 	
 	$start=qa_get_start();	
@@ -56,22 +57,50 @@
 		'rows' => ceil($pagesize/qa_opt('columns_users')),
 		'type' => 'users'
 	);
-	
-	if (count($users)) {
-		foreach ($users as $userid => $user)
-			$qa_content['ranking']['items'][]=array(
-				'label' =>
-					(QA_FINAL_EXTERNAL_USERS
-						? qa_get_external_avatar_html($user['userid'], qa_opt('avatar_users_size'), true)
-						: qa_get_user_avatar_html($user['flags'], $user['email'], $user['handle'],
-							$user['avatarblobid'], $user['avatarwidth'], $user['avatarheight'], qa_opt('avatar_users_size'), true)
-					).' '.$usershtml[$user['userid']],
-				'score' => qa_html(number_format($user['points'])),
-				'raw' => $user,
-			);
-	
-	} else
-		$qa_content['title']=qa_lang_html('main/no_active_users');
+
+// Récupération de la catégorie ID par l'URL
+$querystring = $_SERVER['QUERY_STRING'];
+$position1 = strpos($querystring,'k_1=');
+$position2 = strpos($querystring,'&');
+$longueur=$position2-$position1-4;
+$category_tags = substr ($querystring , $position1+4, $longueur);
+$categoryid = substr($category_tags, 1,1);
+$getcountedranking = qa_db_get_ranking($categoryid) ; // remplacer par catégorie ID
+
+$userfinal ; // variable qui aura le tableau final des users
+$userlength = count($users);
+$countlength = count($getcountedranking) ;
+$z = 0 ; // indice pour le tableau
+for ($x = 0; $x < $userlength; $x++) {
+    $userline = $users[$x] ;
+
+    for($y=0; $y<$countlength;$y++){
+        $countline = $getcountedranking[$y] ;
+
+        if($countline['userid'] == $userline['userid']){
+            $nb = intval($countline['counted'])*150 ; // multiplie le nombre trouvé pour afficher les scores
+            $userline['points'] = $nb ;
+            $userfinal[$z] = $userline ;
+            $z++ ;
+        }
+    }
+}
+
+if (count($users)) {
+    foreach ($userfinal as $userid => $userfinal)
+        $qa_content['ranking']['items'][]=array(
+            'label' =>
+                (QA_FINAL_EXTERNAL_USERS
+                    ? qa_get_external_avatar_html($userfinal['userid'], qa_opt('avatar_users_size'), true)
+                    : qa_get_user_avatar_html($userfinal['flags'], $userfinal['email'], $userfinal['handle'],
+                        $userfinal['avatarblobid'], $userfinal['avatarwidth'], $userfinal['avatarheight'], qa_opt('avatar_users_size'), true)
+                ).' '.$usershtml[$userfinal['userid']],
+            'score' => qa_html(number_format($userfinal['points'])),
+            'raw' => $userfinal,
+        );
+
+} else
+    $qa_content['title']=qa_lang_html('main/no_active_users');
 	
 	$qa_content['page_links']=qa_html_page_links(qa_request(), $start, $pagesize, $usercount, qa_opt('pages_prev_next'));
 

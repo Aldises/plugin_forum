@@ -82,7 +82,16 @@
 		qa_db_query_sub('DELETE FROM ^userlimits WHERE userid=$', $userid);
 	}
 
-	
+function qa_db_get_ranking($categoryid) {
+
+    $test =  qa_db_read_all_assoc(qa_db_query_sub(
+        "SELECT COUNT(postid) AS counted,userid FROM ^posts WHERE categoryid=# GROUP BY userid",
+        $categoryid
+    ));
+    return $test ;
+
+}
+
 	function qa_db_user_find_by_email($email)
 /*
 	Return the ids of all users in the database which match $email (should be one or none)

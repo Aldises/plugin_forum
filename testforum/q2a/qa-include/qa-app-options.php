@@ -327,16 +327,16 @@
 			'permit_vote_a' => QA_PERMIT_USERS,
 			'permit_vote_down' => QA_PERMIT_USERS,
 			'permit_vote_q' => QA_PERMIT_USERS,
-			'points_a_selected' => 30,
-			'points_a_voted_max_gain' => 20,
-			'points_a_voted_max_loss' => 5,
-			'points_base' => 100,
-			'points_multiple' => 10,
-			'points_post_a' => 4,
-			'points_post_q' => 2,
-			'points_q_voted_max_gain' => 10,
-			'points_q_voted_max_loss' => 3,
-			'points_select_a' => 3,
+			'points_a_selected' => 0,
+			'points_a_voted_max_gain' => 0,
+			'points_a_voted_max_loss' => 0,
+			'points_base' => 0,
+			'points_multiple' => 1,
+			'points_post_a' => 150,
+			'points_post_q' => 150,
+			'points_q_voted_max_gain' => 0,
+			'points_q_voted_max_loss' => 0,
+			'points_select_a' => 0,
 			'q_urls_title_length' => 50,
 			'show_a_c_links' => 1,
 			'show_a_form_immediate' => 'if_no_as',
@@ -436,25 +436,25 @@
 				case 'points_vote_up_q':
 				case 'points_vote_down_q':
 					$oldvalue=qa_opt('points_vote_on_q');
-					$value=is_numeric($oldvalue) ? $oldvalue : 1;
+					$value=is_numeric($oldvalue) ? $oldvalue : 0; // Gestion des points pour les votes
 					break;
 					
 				case 'points_vote_up_a':
 				case 'points_vote_down_a':
 					$oldvalue=qa_opt('points_vote_on_a');
-					$value=is_numeric($oldvalue) ? $oldvalue : 1;
+					$value=is_numeric($oldvalue) ? $oldvalue : 0; // Gestion des points pour les votes
 					break;
 					
 				case 'points_per_q_voted_up':
 				case 'points_per_q_voted_down':
 					$oldvalue=qa_opt('points_per_q_voted');
-					$value=is_numeric($oldvalue) ? $oldvalue : 1;
+					$value=is_numeric($oldvalue) ? $oldvalue : 0; // Gestion des points pour les votes
 					break;
 					
 				case 'points_per_a_voted_up':
 				case 'points_per_a_voted_down':
 					$oldvalue=qa_opt('points_per_a_voted');
-					$value=is_numeric($oldvalue) ? $oldvalue : 2;
+					$value=is_numeric($oldvalue) ? $oldvalue : 0; // Gestion des points pour les votes
 					break;
 					
 				case 'captcha_module':

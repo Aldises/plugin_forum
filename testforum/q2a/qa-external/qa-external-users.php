@@ -637,7 +637,7 @@
 			$usershtml[$userid]=htmlspecialchars($publicusername);
 			
 			if ($should_include_link)
-				$usershtml[$userid]='<a href="'.qa_path_html('user/'.$publicusername).'" class="qa-user-link">'.$usershtml[$userid].'</a>';
+                $usershtml[$userid]='<span class="qa-user-link">'.$publicusername.'</span>'; // Supression du lien pour renvoyer aux utilisateurs
 		}
 			
 		return $usershtml;

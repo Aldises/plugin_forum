@@ -65,9 +65,9 @@
 					: qa_lang_html_sub('main/x_points', qa_html(number_format($userpoints)));
 						
 				$this->output(
-					'<span class="qa-logged-in-points">',
-					'('.$pointshtml.')',
-					'</span>'
+				//	'<span class="qa-logged-in-points">',
+				//	'('.$pointshtml.')',                            // suppression points dans l'en-tête
+				//	'</span>'
 				);
 			}
 		}
