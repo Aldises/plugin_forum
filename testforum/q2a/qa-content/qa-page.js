@@ -157,7 +157,9 @@ function qa_favorite_click(elem)
 
 function qa_ajax_post(operation, params, callback)
 {
-	jQuery.extend(params, {qa:'ajax', qa_operation:operation, qa_root:qa_root, qa_request:qa_request});
+    var categorytag = getURLParameter('k_1');
+
+    jQuery.extend(params, {qa:'ajax', qa_operation:operation, qa_root:qa_root, qa_request:qa_request, qa_categorytag:categorytag});
 
 	jQuery.post(qa_root, params, function(response) {
 		var header='QA_AJAX_RESPONSE';
@@ -174,4 +176,8 @@ function qa_ajax_post(operation, params, callback)
 function qa_ajax_error()
 {
 	alert('Unexpected response from server - please try again or switch off Javascript.');
+}
+
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
 }

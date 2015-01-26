@@ -218,16 +218,25 @@
 			);
 			$username = $result['username'];
 			$email = $result['email'];
-			
-			
-			//Get the Q2A category id from the URL
-			$querystring = $_SERVER['QUERY_STRING'];
-			$position1 = strpos($querystring,'k_1=');
-			$position2 = strpos($querystring,'&');
-			$longueur=$position2-$position1-5;
-			$category_id = substr ($querystring , $position1+5,$longueur);
-		
-			
+
+            //If the method is called from a AJAX request, no URL parameters will be present
+            //The categorytag should be posted by the AJAX request
+            //Here to check if this parameter is in a POST request
+            $categorytag = qa_post_text('qa_categorytag');
+            $category_id = '';
+            if (!isset($categorytag)) {
+                //Get the Q2A category id from the URL
+                $querystring = $_SERVER['QUERY_STRING'];
+                //error_log($querystring);
+                $position1 = strpos($querystring,'k_1=');
+                $position2 = strpos($querystring,'&');
+                $longueur=$position2-$position1-5;
+                $category_id = substr ($querystring , $position1+5,$longueur);
+            }
+            else {
+                $category_id = substr($categorytag, 1);
+            }
+
 			//setcookie('courseid', $courseid, time()+3600, '/');
 			$result=mysql_fetch_assoc(
 				mysql_query(
