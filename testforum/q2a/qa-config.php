@@ -29,12 +29,13 @@
 	  THE 4 DEFINITIONS BELOW ARE REQUIRED AND MUST BE SET BEFORE USING!
 	======================================================================
 */
+require_once(dirname(dirname(dirname(dirname(__FILE__)))).'\config.php');
+    global $CFG ;
+	define('QA_MYSQL_HOSTNAME', $CFG->dbhost); // try '127.0.0.1' or 'localhost' if MySQL on same server
+	define('QA_MYSQL_USERNAME', $CFG->dbuser);
+	define('QA_MYSQL_PASSWORD', $CFG->dbpass);
+	define('QA_MYSQL_DATABASE', $CFG->dbname);
 
-	define('QA_MYSQL_HOSTNAME', '127.0.0.1'); // try '127.0.0.1' or 'localhost' if MySQL on same server
-	define('QA_MYSQL_USERNAME', 'root');
-	define('QA_MYSQL_PASSWORD', '');
-	define('QA_MYSQL_DATABASE', 'moodle');
-	
 /*
 	Ultra-concise installation instructions:
 	

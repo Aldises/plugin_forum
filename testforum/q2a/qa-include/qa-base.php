@@ -168,7 +168,8 @@
 	Second stage of setting up Q2A constants, after (if necessary) loading WordPress integration
 */
 	{
-	
+        require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))).'\config.php');
+        global $CFG ;
 	//	Default values if not set in qa-config.php
 	
 		@define('QA_COOKIE_DOMAIN', '');
@@ -219,21 +220,13 @@
 			$_SERVER['PHP_SELF']=stripslashes($_SERVER['PHP_SELF']);
 		
 		} else {
-            //use Moodle DB connection parameters in config.php
-            /*if (!defined('QA_FINAL_MYSQL_HOSTNAME')) {
-                global $CFG;
-                define('QA_FINAL_MYSQL_HOSTNAME', $CFG->dbhost);
-                define('QA_FINAL_MYSQL_USERNAME', $CFG->dbuser);
-                define('QA_FINAL_MYSQL_PASSWORD', $CFG->dbpass);
-                define('QA_FINAL_MYSQL_DATABASE', $CFG->dbname);
-                define('QA_FINAL_EXTERNAL_USERS', QA_EXTERNAL_USERS);
-            }*/
-            define('QA_FINAL_MYSQL_HOSTNAME', QA_MYSQL_HOSTNAME);
-            define('QA_FINAL_MYSQL_USERNAME', QA_MYSQL_USERNAME);
-            define('QA_FINAL_MYSQL_PASSWORD', QA_MYSQL_PASSWORD);
-            define('QA_FINAL_MYSQL_DATABASE', QA_MYSQL_DATABASE);
-            define('QA_FINAL_EXTERNAL_USERS', QA_EXTERNAL_USERS);
-		}
+            define('QA_FINAL_MYSQL_HOSTNAME', $CFG->dbhost);
+            define('QA_FINAL_MYSQL_USERNAME', $CFG->dbuser);
+            define('QA_FINAL_MYSQL_PASSWORD', $CFG->dbpass);
+            define('QA_FINAL_MYSQL_DATABASE', $CFG->dbname);
+            define('QA_FINAL_EXTERNAL_USERS', true);
+
+        }
 		
 	//	Possible URL schemes for Q2A and the string used for url scheme testing
 
