@@ -64,7 +64,7 @@ $PAGE->set_context($context);
 
 //Connecting to the Q2A database
 $conne = mysql_connect(QA_FINAL_MYSQL_HOSTNAME, QA_FINAL_MYSQL_USERNAME, QA_FINAL_MYSQL_PASSWORD);
-mysql_select_db(QA_FINAL_MYSQL_PASSWORD, $conne);
+mysql_select_db(QA_FINAL_MYSQL_DATABASE, $conne);
 
 //Obtaining the Q2A category tags
 $sqle = "SELECT tags FROM qa_categories WHERE categoryid ='".$course->id."'";
