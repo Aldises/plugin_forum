@@ -237,10 +237,18 @@
                 $category_id = substr($categorytag, 1);
             }
 
+            $result=mysql_fetch_assoc(
+                mysql_query(
+                    "SELECT content FROM qa_categories WHERE categoryid=".$category_id,
+                    $qa_db_connection
+                )
+            );
+            $courseid = $result['content'];
+
 			//setcookie('courseid', $courseid, time()+3600, '/');
 			$result=mysql_fetch_assoc(
 				mysql_query(
-					"SELECT ra.roleid FROM mdl_role_assignments ra, mdl_context ct, mdl_course cs where ra.contextid = ct.id AND ct.instanceid = cs.id AND ct.contextlevel = 50 AND ra.userid =".$userid_moodle." AND ct.instanceid = ".$category_id,
+					"SELECT ra.roleid FROM mdl_role_assignments ra, mdl_context ct, mdl_course cs where ra.contextid = ct.id AND ct.instanceid = cs.id AND ct.contextlevel = 50 AND ra.userid =".$userid_moodle." AND ct.instanceid = ".$courseid,
 					$qa_db_connection
 				)
 			);

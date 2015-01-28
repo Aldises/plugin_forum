@@ -80,22 +80,22 @@ function testforum_add_instance(stdClass $testforum, mod_testforum_mod_form $mfo
     //Obtaining the course shortname
     $conn = mysql_connect(QA_FINAL_MYSQL_HOSTNAME, QA_FINAL_MYSQL_USERNAME, QA_FINAL_MYSQL_PASSWORD);
     mysql_select_db(QA_FINAL_MYSQL_DATABASE, $conn);
-    
-    $sql = "SELECT fullname FROM mdl_course WHERE id ='".$testforum->course."'";
-    $result = mysql_query($sql);
-    $fn= mysql_fetch_assoc($result);
-    
-  	//Connecting to the Q2A database
-    $connect = mysql_connect(QA_FINAL_MYSQL_HOSTNAME, QA_FINAL_MYSQL_USERNAME, QA_FINAL_MYSQL_PASSWORD);
-    mysql_select_db(QA_FINAL_MYSQL_DATABASE, $connect);
-    
+
+    $forumid =  $DB->insert_record('testforum', $testforum);
+
     //Updating Q2A database
     mysql_query(
-    "INSERT INTO qa_categories (categoryid,title,tags,backpath)
-    VALUES($testforum->course,'$fn[fullname]','c$testforum->course','c$testforum->course')"
+        "INSERT INTO qa_categories (title,content)
+        VALUES('$forumid','$testforum->course')"
     );
 
-    return $DB->insert_record('testforum', $testforum);
+    $categoryid = mysql_insert_id();
+
+    mysql_query(
+        "UPDATE qa_categories SET tags = 'c$categoryid', backpath = 'c$categoryid' WHERE categoryid = $categoryid"
+    );
+
+    return $forumid;
 }
 
 /**

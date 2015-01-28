@@ -67,7 +67,7 @@ $conne = mysql_connect(QA_FINAL_MYSQL_HOSTNAME, QA_FINAL_MYSQL_USERNAME, QA_FINA
 mysql_select_db(QA_FINAL_MYSQL_DATABASE, $conne);
 
 //Obtaining the Q2A category tags
-$sqle = "SELECT tags FROM qa_categories WHERE categoryid ='".$course->id."'";
+$sqle = "SELECT tags FROM qa_categories WHERE title ='".$testforum->id."'";
 $resulte = mysql_query($sqle);
 $cat= mysql_fetch_assoc($resulte);
 
@@ -84,15 +84,6 @@ echo $OUTPUT->heading('Forum');
 echo "<html>";
 
 //begin
-$sessionid_moodle = $_COOKIE['MoodleSession'];
-//echo 'session id: '.$sessionid_moodle;
-
-$result=mysql_fetch_assoc(
-    mysql_query(
-        "SELECT userid FROM mdl_sessions WHERE sid='".$sessionid_moodle."'"
-    )
-);
-$userid_moodle = $result['userid'];
 
 echo " <iframe src='../testforum/q2a/index.php?k_1=$cat[tags]&qa=questions&qa_1=$cat[tags]' width='1200' height='1000' frameborder='0'></iframe> ";
 
