@@ -168,7 +168,7 @@
 	Second stage of setting up Q2A constants, after (if necessary) loading WordPress integration
 */
 	{
-        require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))).'\config.php');
+        require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/config.php');
         global $CFG ;
 	//	Default values if not set in qa-config.php
 	

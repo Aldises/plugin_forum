@@ -29,7 +29,7 @@
 	  THE 4 DEFINITIONS BELOW ARE REQUIRED AND MUST BE SET BEFORE USING!
 	======================================================================
 */
-require_once(dirname(dirname(dirname(dirname(__FILE__)))).'\config.php');
+require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config.php');
     global $CFG ;
 	define('QA_MYSQL_HOSTNAME', $CFG->dbhost); // try '127.0.0.1' or 'localhost' if MySQL on same server
 	define('QA_MYSQL_USERNAME', $CFG->dbuser);
